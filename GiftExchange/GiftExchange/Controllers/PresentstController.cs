@@ -15,5 +15,10 @@ namespace GiftExchange.Controllers
             var presents = new GiftServices().GetAllPresents();
             return View(presents);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }

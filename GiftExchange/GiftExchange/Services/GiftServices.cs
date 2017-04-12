@@ -27,6 +27,28 @@ namespace GiftExchange.Services
             }
             return rv;
         }
-   
+     public static void AddPresent(Present gift)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var text = (@"INSERT INTO dbo.Presents (Contents, GiftHint, ColorWrappingPaper, Height, Width, Depth, Weight, IsOpened)" + "Values (@conts, @hint, @paper, @howhigh, @howwide, @howdeep, @howheavy, @open)");
+
+                var cmd = new SqlCommand(text, connection);
+
+                cmd.Parameters.AddWithValue("@conts", gift.Contents);
+                cmd.Parameters.AddWithValue("@hint", gift.GiftHint);
+                cmd.Parameters.AddWithValue("@paper", gift.ColorWrappingPaper);
+                cmd.Parameters.AddWithValue("@howhigh", gift.Height);
+                cmd.Parameters.AddWithValue("@howwide", gift.Width);
+                cmd.Parameters.AddWithValue("@howdeep", gift.Depth);
+                cmd.Parameters.AddWithValue("@howheavy", gift.Weight);
+                cmd.Parameters.AddWithValue("@open", gift.IsOpened);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            
+        }
     }
 }

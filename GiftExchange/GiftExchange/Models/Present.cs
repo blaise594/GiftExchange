@@ -16,6 +16,7 @@ namespace GiftExchange.Models
         public double? Depth { get; set; }
         public double? Weight { get; set; }
         public bool? IsOpened { get; set; } = false;
+        public int Id { get; set; }
 
         public Present()
         { }
@@ -29,6 +30,7 @@ namespace GiftExchange.Models
             this.Depth = reader["Depth"] as double?;
             this.Weight = reader["Weight"] as double?;
             this.IsOpened = reader["IsOpened"] as bool?;
+            this.Id = (int)reader["Id"];
         }
     }
 }

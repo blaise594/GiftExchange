@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GiftExchange.Services;
-
+using GiftExchange.Models;
 namespace GiftExchange.Controllers
 {
     public class PresentstController : Controller
@@ -21,7 +21,7 @@ namespace GiftExchange.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -34,7 +34,30 @@ namespace GiftExchange.Controllers
             var Weight = collection["Weight"];
             var IsOpened = collection["IsOpened"];
 
+            // fill in this new present with all properties
+            // from form
+            var gift = new Present()
+            {
+                Contents = Contents,
+                GiftHint = GiftHint,
+                ColorWrappingPaper = ColorWrappingPaper,
+                Height = double.Parse(Height),
+                Width = double.Parse(Width),
+                Depth = double.Parse(Depth),
+                Weight = double.Parse(Weight),
+                IsOpened = bool.Parse(IsOpened)
+
+            };
+             GiftServices.AddPresent(gift);
             return RedirectToAction("Index");
         }
+
+
+
     }
-}
+}       
+
+            
+    
+
+    
